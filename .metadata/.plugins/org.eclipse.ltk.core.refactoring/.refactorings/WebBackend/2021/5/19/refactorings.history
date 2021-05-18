@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;MvcConfig.java&apos; to &apos;WebFrontend/src/main/java/com.evanshop.config&apos;&#x0D;&#x0A;- Original project: &apos;WebBackend&apos;&#x0D;&#x0A;- Destination element: &apos;WebFrontend/src/main/java/com.evanshop.config&apos;&#x0D;&#x0A;- Original element: &apos;com.evanshop.admin.config.MvcConfig.java&apos;" description="Copy compilation unit" destination="=WebFrontend/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.evanshop.config" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.evanshop.admin.config{MvcConfig.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1620449470037" units="1" version="1.0"/>
+</session>

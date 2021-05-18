@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Page head -->
+<head th:replace="layout/fragments :: page_head(${pageTitle}, 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="layout/navigation :: header_menu"></div>
+	
+	<div th:if="${listCategoryParents != null && !listCategoryParents.empty}">
+		<div class="row">
+			<div class="col">
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a th:href="@{/}">Home</a>
+						</li> 
+						<th:block th:each="category : ${listCategoryParents}">
+						<li class="breadcrumb-item">
+							<a th:href="@{'/category/' + ${category.alias}}">[[${category.name}]]</a>
+						</li>
+						</th:block>
+						<li class="breadcrumb-item" th:if="${product != null}">
+							<span>[[${product.shortName}]]</span>
+						</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="col-sm">
+			<div class="shadow">
+				<img id="bigImage" th:src="@{${product.mainImagePath}}" class="img-fluid" index="0" />
+			</div>
+			<div class="row justify-content-center">
+				<div class="m-2 shadow border border-secondary p-1">
+					<img class="image-thumbnail" th:src="@{${product.mainImagePath}}" height="50px" />
+				</div>
+				<th:block th:each="extraImage, status : ${product.images}" >
+				<div class="m-2 shadow border border-secondary p-1">
+					<img class="image-thumbnail" th:src="@{${extraImage.imagePath}}" height="50px" th:index="${status.count}"/>
+				</div>
+				</th:block>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div>
+				<h2>[[${product.name}]]</h2>
+			</div>
+			<div>
+				<span>Brand: [[${product.brand.name}]]</span>
+			</div>
+			<div>
+				List Price:
+				<span th:if="${product.discountPercent <= 0}">$ [[${product.price}]]</span>
+				<del><span th:if="${product.discountPercent > 0}">$ [[${product.price}]]</span></del>
+			</div>
+			<div th:if="${product.discountPercent > 0}">
+				Price:
+				<span style="font-size: larger; color: darkred;">$ [[${product.discountPrice}]]</span>
+				([[${product.discountPercent}]] % OFF)
+			</div>
+			<div>&nbsp;</div>
+			<div th:utext="${product.shortDescription}"></div>
+		</div>
+		<div class="col-sm-2">
+			<div>
+				<span th:if="${product.inStock}" class="text-success" ><b>In Stock</b></span>
+				<span th:unless="${product.inStock}" class="text-danger"><b>Out of Stock</b></span>
+			</div>
+			<div class="mt-2">
+				<input type="text" size="5" value="1" />
+			</div>
+			<div class="mt-3">
+				<input type="button" class="btn btn-primary" value="Add to Cart" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div><hr /></div>
+			<div><h3>Product Description:</h3></div>
+			 <div th:utext="${product.fullDescription}"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div><hr /></div>
+			<div><h3>Product Details:</h3></div>
+			<th:block th:each="detail : ${product.details}">
+			<div>
+				<b>[[${detail.name}]]</b>:
+				<span> [[${detail.value}]]</span>
+			</div>
+			</th:block>
+		</div>
+	</div>
+		
+	<div th:replace="product/image_carousel:: content"></div>
+	<div th:replace="layout/navigation :: footer_menu"></div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		bigImage = $("#bigImage");
+		
+		$(".image-thumbnail").mouseover(function(){
+			currentImageSource = $(this).attr("src");
+			currentImageIndex = $(this).attr("index")
+			bigImage.attr("src", currentImageSource);
+			bigImage.attr("index", currentImageSource);
+		});
+		
+		bigImage.on("click", function(){
+			$("#carouselModal").modal("show");
+		});
+	});
+</script>
+</body>
+</html>

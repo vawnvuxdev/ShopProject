@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<!-- Menu -->
+	<div th:fragment="menu">
+		<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+			<input type="submit" />
+		</form>
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+			<a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/springboot-logo.png}" alt="Springboot"
+					width="40px"></a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#topNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="topNavbar">
+				<ul class="navbar-nav">
+					<th:block sec:authorize="hasAuthority('Admin')">
+						<li class="nav-item dropdown">
+							<a th:href="@{/users}" class="nav-link dropdown-toggle" data-toggle="dropdown">Users</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" th:href="@{/users/new}" >Create New</a>
+								<a class="dropdown-item" th:href="@{/users}">Show All</a>
+							</div>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<li class="nav-item dropdown">
+							<a th:href="@{/categories}" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" th:href="@{/categories/new}" >Create New</a>
+								<a class="dropdown-item" th:href="@{/categories}">Show All</a>
+							</div>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<li class="nav-item dropdown">
+							<a th:href="@{/brands}" class="nav-link dropdown-toggle" data-toggle="dropdown">Brands</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" th:href="@{/brands/new}" >Create New</a>
+								<a class="dropdown-item" th:href="@{/brands}">Show All</a>
+							</div>
+						</li>
+					</th:block>
+										
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson', 'Shipper')">										
+						<li class="nav-item dropdown">
+							<a th:href="@{/products}" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" th:href="@{/products/new}" sec:authorize="hasAnyAuthority('Admin', 'Editor')">Create New</a>
+								<a class="dropdown-item" th:href="@{/products}">Show All</a>
+							</div>
+						</li>
+					</th:block>
+
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">			
+						<li class="nav-item">
+							<a th:href="@{/customers}" class="nav-link">Customers</a>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">							
+						<li class="nav-item">
+							<a th:href="@{/orders}" class="nav-link">Orders</a>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">							
+						<li class="nav-item">
+							<a th:href="@{/shipping}" class="nav-link">Shipping</a>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">		
+						<li class="nav-item">
+							<a th:href="@{/reports}" class="nav-link">Sales reports</a>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<li class="nav-item">
+							<a th:href="@{/articles}" class="nav-link">Articles</a>
+						</li>
+					</th:block>
+
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
+						<li class="nav-item">
+							<a th:href="@{/questions}" class="nav-link">Questions</a>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
+						<li class="nav-item">
+							<a th:href="@{/reviews}" class="nav-link">Reviews</a>
+						</li>
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<li class="nav-item">
+							<a th:href="@{/menus}" class="nav-link">Menus</a>
+						</li>
+					</th:block>
+
+					<li class="nav-item" sec:authorize="hasAuthority('Admin')">
+						<a th:href="@{/settings}" class="nav-link">Settings</a>
+					</li>
+					
+					<li>
+						<span class="fas fa-user fa-2x icon-dark"></span>
+					</li>
+					
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}"
+							sec:authentication="principal.fullName"></a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" id="logoutLink">Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

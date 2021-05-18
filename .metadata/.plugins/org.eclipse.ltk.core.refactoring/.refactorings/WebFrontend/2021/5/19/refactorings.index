@@ -1,0 +1,18 @@
+1620448715765	Extract local variable 'findAllEnabled'
+1620448967390	Extract local variable 'listEnabledCategories'
+1620449094052	Extract local variable 'children'
+1620449207495	Extract local variable 'listNoChildrenCateogries'
+1620450441816	Extract local variable 'category'
+1620450632492	Move compilation units
+1620450647218	Move compilation unit
+1620450658892	Rename package 'com.evanshop.domain'
+1620450666471	Copy package
+1620450683525	Rename package 'controller'
+1620450686318	Delete element
+1620450891357	Copy file
+1620450957693	Extract local variable 'categoryByAlias'
+1620451345571	Extract local variable 'parent'
+1620451650667	Extract local variable 'listCategoryParents'
+1620453063116	Extract local variable 'listProductsByCategory'
+1620453542491	Extract local variable 'pageProducts'
+1620453783568	Extract local variable 'listProducts'

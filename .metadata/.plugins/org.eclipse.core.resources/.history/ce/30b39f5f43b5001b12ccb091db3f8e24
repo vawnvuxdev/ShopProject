@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Page head -->
+<head th:replace="layout/fragments :: page_head('Home - Shop Admin', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="layout/navigation :: header_menu"></div>
+	<div th:replace="layout/navigation :: search_nav"></div>
+	<div><h1>Shopping by Categories</h1></div>
+	<div th:replace="layout/navigation :: footer_menu"></div>
+</div>
+</body>
+</html>

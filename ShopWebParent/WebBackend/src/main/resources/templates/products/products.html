@@ -1,0 +1,146 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="layouts/fragments :: page_head('Products - Shopevan', 'none')"></head>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: menu"></div>
+
+		<div class="m-3">
+			<h3>Manage Products</h3>
+			<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+				<a th:href="@{/products/new}" class="fas fa-plus-square icon-dark mr-3" title="Create new Product"></a>
+				<a th:href="@{/products/export/csv}" class="fas fa-file-csv icon-dark mr-3" title="Export to CSV"></a>
+			</th:block>
+			
+		</div>
+		<hr>
+
+		<!-- Form search -->
+		<div>
+			<form th:action="@{/products/page/1}" class="form-inline m-3" id="searchForm">
+				<input type="hidden" name="sortField" th:value="${sortField}" />
+				<input type="hidden" name="sortDir" th:value="${sortDir}" />
+				Category:&nbsp;
+				<select class="form-control" name="categoryId" id="dropdownCategory"> 
+					<option value="0">All Category</option>
+					<th:block th:each="catg : ${listCategories}">
+					<option th:value="${catg.id}" th:selected="(${categoryId} == ${catg.id})">[[${catg.name}]]</option>
+					</th:block>
+				</select>
+				
+				&nbsp;&nbsp;Filter:&nbsp;
+				<input type="search" th:value="${keyword}" name="keyword" class="form-control" required />
+				&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+				&nbsp;&nbsp;
+				<button type="button" class="btn btn-secondary" onclick="clearFilter()"><i
+						class="fas fa-eraser"></i></button>
+			</form>
+			
+			<!-- Show message -->
+			<div class="alert alert-success text-center" th:if="${message}">[[${message}]]</div>		
+		</div>
+
+		<!-- Show brands  -->
+		<div class="full-details">
+			<table class="table table-striped table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th  th:replace="layouts/fragments :: column_link('/products', 'id', 'ID', 'none')" ></th>			
+						<th>Main Image</th>
+						<th th:replace="layouts/fragments :: column_link('/products', 'name', 'Name', 'none')" ></th>			
+						<th th:replace="layouts/fragments :: column_link('/products', 'brand', 'Brand', 'none')" ></th>			
+						<th th:replace="layouts/fragments :: column_link('/products', 'category', 'Category', 'none')" ></th>	
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<th>Enabled</th>
+						</th:block>					
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${listProducts}" style="height: 100px">
+						<td>
+							[[${product.id}]]
+						</td>
+						<td>
+							<img alt="Main image" th:src="@{${product.mainImagePath}}" style="width: 120px;" class="img-fluid" />
+						</td>
+						<td>
+							<a th:href="@{'/products/detail/' + ${product.id}}"
+								class="link-detail" 
+								title="View product detail !">[[${product.sortName}]]</a>
+							
+						</td>
+						<td>
+							[[${product.brand.name}]]
+						</td>
+						<td>
+							[[${product.category.name}]]
+						</td>
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<td>
+							<div th:replace="layouts/fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})"></div>
+						</td>
+						</th:block>
+						<td>
+							<a th:href="@{'/products/detail/' + ${product.id}}"
+								class="fas fa-file-alt icon-green mr-2 link-detail" 
+								title="View product detail !"></a>
+							<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">							
+							<div th:replace="layouts/fragments :: edit('/products', 'product', ${product.id})"></div>
+							</th:block>
+							<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">						
+							<div th:replace="layouts/fragments :: delete('/products', 'product', ${product.id})"></div>
+							</th:block>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Pagination  -->
+		<div th:replace="layouts/fragments :: pagination('/products', 'Product')"></div>
+		
+		<!-- Delete confirmation modal -->
+		<div th:replace="layouts/modal :: delete_confirm"></div>
+
+		<!-- Detail modal -->
+		<div class="modal fade" id="detailModal">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<div th:replace="layouts/fragments :: footer"></div>
+	</div>
+	
+	<!-- Script -->
+	<script th:src="@{/js/common_list.js}"></script>
+	<script type="text/javascript">
+		moduleURL = "[[@{/products}]]";
+
+		$(document).ready(function(e){
+			$(".link-delete").on("click", function(e){
+				e.preventDefault();
+				showDeleteConfirmModal($(this), 'product');
+			});
+			
+			$(".link-detail").on("click", function(e){
+				e.preventDefault();
+				linkDetailURL = $(this).attr("href");
+				$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+			});
+			
+			$("#dropdownCategory").on("change", function(){
+				$("#searchForm").submit();
+			});
+			
+		});
+	</script>
+</body>
+
+</html>

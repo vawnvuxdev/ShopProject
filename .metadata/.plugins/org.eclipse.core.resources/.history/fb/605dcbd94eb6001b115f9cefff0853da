@@ -1,0 +1,5 @@
+package com.evanshop.admin.setting;
+
+public interface setting {
+
+}

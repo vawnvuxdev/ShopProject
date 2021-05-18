@@ -1,0 +1,32 @@
+package com.evanshop.admin.setting;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+
+import com.evanshop.admin.repository.SettingRepository;
+import com.evanshop.common.entity.Setting;
+import com.evanshop.common.entity.SettingCategory;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+public class SettingRepoTest {
+	
+	@Autowired SettingRepository repo;
+	
+	@Test
+	public void testCreateGeneralSettings() {
+//		Setting siteName = new Setting("SITE_NAME", "Shopevan", SettingCategory.GENERAL);
+		Setting siteLogo = new Setting("SITE_LOGO", "Shopevan", SettingCategory.GENERAL);
+		Setting siteName = new Setting("SITE_NAME", "Shopevan", SettingCategory.GENERAL);
+		Setting savedSetting = repo.save(siteName);
+		
+		assertThat(savedSetting).isNotNull();
+	}
+}

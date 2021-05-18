@@ -1,0 +1,125 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+		
+<head th:replace="layouts/fragments :: page_head(${pageTitle}, 'none')"></head>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: menu"></div>
+		
+		<div class="m-3">
+			<h3>Category Manager - [[${pageTitle}]]</h3>
+		</div>
+		<hr>
+		
+		<!-- Show message -->
+		<div class="alert alert-success text-center" th:if="${message}">[[${message}]]</div>	
+		
+		<form th:action="@{/categories/save}" th:object="${category}" method="POST" style="max-width: 500px; margin: 0 auto;"
+			enctype="multipart/form-data" onsubmit="return checkUnique(this)">
+			<input type="hidden" th:field="*{id}" />
+			<div class="border boder-secondary rounded p-3">
+
+				<div class="form-group row">
+					<label for="" class="col-sm-4 col-form-label">Category Name: </label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{name}" class="form-control" required maxlength="128" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="" class="col-sm-4 col-form-label">Alias: </label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{alias}" class="form-control" required maxlength="64" />
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="" class="col-sm-4 col-form-label">Parent Category: </label>
+					<div class="col-sm-8">
+						<select class="form-control" th:field="*{parent}">
+							<option value="0">[No Parent]</option>
+							<th:block th:each="catg : ${listCategories}">
+								<option th:value="${catg.id}">[[${catg.name}]]</option>
+							</th:block>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="" class="col-sm-4 col-form-label">Photo: </label>
+					<div class="col-sm-8">
+						<input type="hidden" th:field="*{image}">
+						<input type="file" id="fileImage" accept="image/png,image/jpeg, image/jpg" name="fileImage"
+							class="mb-2" th:required="${category.imagePath == null}" />
+						
+						<div class="mt-2">
+							<img th:src="@{/images/default-thumbnail.jpg}" alt="Image preview" id="thumbnail" 
+								class="img-fluid" style="width: 150px"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="" class="col-sm-4 col-form-label">Enabled: </label>
+					<div class="col-sm-8">
+						<input type="checkbox" th:field="*{enabled}" />
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<input type="submit" value="Save" class="btn btn-primary m-3" />
+					<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Modal -->
+	<div th:replace="layouts/modal :: modal_dialog"></div>
+
+	<!-- Footer -->
+	<div th:replace="layouts/fragments :: footer"></div>
+
+	<script type="text/javascript">
+		moduleURL="/ShopAdmin/categories";
+		
+		function checkUnique(form){
+			catgId = $("#id").val();
+			catgName = $("#name").val();
+			catgAlias = $("#alias").val();
+
+			csrfValue = $("input[name='_csrf']").val();
+			
+			url="[[@{/categories/check_unique}]]";
+			
+			params = {
+				id: catgId,
+				name: catgName,
+				alias: catgAlias,
+				_csrf: csrfValue
+			};
+
+			$.post(url, params, function(response){
+				if(response == "OK"){
+					form.submit();
+				} else if (response == "DuplicateName"){
+					showWarningModal("This category has already existed!");
+				} else if (response == "DuplicateAlias"){
+					showWarningModal("This category has already existed!");
+				} else {
+					showErrorModal("Unknown response from server");
+				}
+			}).fail(function(){
+				alert('Failed');
+			});
+			
+			return false;
+		}
+		
+	</script>
+	<script src="/ShopAdmin/js/common_form.js"></script>
+	
+</body>
+</html>

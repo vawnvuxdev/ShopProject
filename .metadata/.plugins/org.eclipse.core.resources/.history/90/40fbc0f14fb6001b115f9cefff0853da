@@ -1,0 +1,24 @@
+package com.evanshop.admin.setting;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import com.evanshop.admin.repository.SettingRepository;
+import com.evanshop.common.entity.Setting;
+import com.evanshop.common.entity.SettingCategory;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+public class SettingRepoTest {
+	
+	@Autowired SettingRepository repo;
+	
+	@Test
+	public void testGeneralSetting() {
+		Setting siteName = new Setting("SITE_NAME", "Shopevan", SettingCategory.GENERAL);
+		
+	}
+}

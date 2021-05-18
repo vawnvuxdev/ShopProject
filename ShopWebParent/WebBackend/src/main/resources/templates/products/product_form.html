@@ -1,0 +1,119 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="layouts/fragments :: page_head(${pageTitle}, 'tag')"></head>
+	<link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
+	<script th:src="@{/richtext/jquery.richtext.min.js}"></script>
+	
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: menu"></div>
+
+		<div class="m-3">
+			<h3>Brand Manager - [[${pageTitle}]]</h3>
+		</div>
+		<hr>
+
+		<!-- Show message -->
+		<div class="alert alert-success text-center" th:if="${message}">[[${message}]]</div>
+
+		<form th:action="@{/products/save}" th:object="${product}" method="POST" 
+				enctype="multipart/form-data" onsubmit="return checkUnique(this)">
+			<input type="hidden" th:field="*{id}" />
+			<input th:if="${product.category != null}" type="hidden" id="categoryId" th:value="${product.category.id}" />
+			<div>
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#image" role="tab">Images</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#details" role="tab">Details</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+					</li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active p-3" id="overview" role="tabpanel">
+						<div th:replace="products/form_overview :: content"></div>
+					</div>
+					
+					<div class="tab-pane" id="description" role="tabpanel">
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">	
+							<div th:replace="products/form_description :: content"></div>
+						</th:block>
+						<th:block sec:authorize="hasAuthority('Salesperson')">
+							<div th:replace="products/readonly/form_description :: content"></div>
+						</th:block>
+					</div>
+					
+					<div class="tab-pane" id="image" role="tabpanel">
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">	
+							<div th:replace="products/form_image :: content"></div>
+						</th:block>
+						<th:block sec:authorize="hasAuthority('Salesperson')">
+							<div th:replace="products/readonly/form_image :: content"></div>
+						</th:block>
+					</div>
+					
+					<div class="tab-pane p-3" id="details" role="tabpanel">
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">	
+							<div th:replace="products/form_details :: content"></div>
+							<div>
+							 <input type="button" value="Add details" class="btn btn-secondary" id="addDetailButton"
+							  onclick="addNextDetailSection()" />
+							</div>
+						</th:block>
+						<th:block sec:authorize="hasAuthority('Salesperson')">
+							<div th:replace="products/readonly/form_details :: content"></div>
+						</th:block>
+					</div>
+					
+					<div class="tab-pane p-3" id="shipping" role="tabpanel">
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">	
+							<div th:replace="products/form_shipping :: content"></div>
+						</th:block>
+						<th:block sec:authorize="hasAuthority('Salesperson')">
+							<div th:replace="products/readonly/form_shipping :: content"></div>
+						</th:block>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center">
+				<input type="submit" value="Save" class="btn btn-primary m-3" /> 
+				<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+			</div>
+		</form>
+	</div>
+
+	<!-- Modal -->
+	<div th:replace="layouts/modal :: modal_dialog"></div>
+
+	<!-- Footer -->
+	<div th:replace="layouts/fragments :: footer"></div>
+
+	<script type="text/javascript">
+		moduleURL = "[[@{/products}]]";
+		brandModuleURL = "[[@{/brands}]]";
+		defaultImageThumbnailSrc = "[[@{/images/default-thumbnail.jpg}]]";	
+		CheckUniqUrl = "[[@{/products/check_unique}]]";
+		
+	</script>
+	<script src="/ShopAdmin/js/common_form.js"></script>
+	<script src="/ShopAdmin/js/product_form_overview.js"></script>
+	<script src="/ShopAdmin/js/product_form_images.js"></script>
+	<script src="/ShopAdmin/js/product_form_details.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Page head -->
+<head th:replace="layout/fragments :: page_head('Home - Shop Admin', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="layout/navigation :: header_menu"></div>
+	<div><h1>Shopping by Categories</h1></div>
+	<div class="row">
+		<div class="col" th:each="category : ${listCategories}">
+			<th:block >
+			<div><img th:src="@{${category.imagePath}}" width="80px"></div>
+			<div><a th:href="@{'/category/' + ${category.alias}}">[[${category.name}]]</a></div>
+			</th:block>
+		</div>
+	</div>
+	<div th:replace="layout/navigation :: footer_menu"></div>
+</div>
+</body>
+</html>

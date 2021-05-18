@@ -1,0 +1,80 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/fragments :: page_head('Brands - Shopevan', 'none')"></head>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: menu"></div>
+
+		<div class="m-3">
+			<h3>Brand Manager</h3>
+			<a th:href="@{/brands/new}" class="fas fa-plus-square icon-dark mr-3" title="Create new brand"></a>
+		</div>
+		<hr>
+
+		<!-- Form search by keyword -->
+		<div th:replace="layouts/fragments :: search_form('/brands')"></div>
+
+		<!-- Show brands  -->
+		<div class="full-details">
+			<table class="table table-striped table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Logo</th>
+						<th  th:replace="layouts/fragments :: column_link('/brands', 'name', 'Name', 'none')" ></th>
+						<th>Categories</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="brand : ${listBrands}" style="height: 100px">
+						<td>
+							[[${brand.id}]]
+						</td>
+						<td>
+							<img th:src="@{${brand.logoPath}}" style="width: 100px" class="image-fluid" />
+						</td>
+						<td>
+							[[${brand.name}]]
+						</td>
+						<td>
+							<th:block th:each="cat : ${brand.categories}">
+								<span class="badge badge-secondary" th:text="${cat.name}"></span>
+							</th:block>
+						</td>
+						<td>
+							<div th:replace="layouts/fragments :: edit('/brands', 'brand', ${brand.id})"></div>
+							<div th:replace="layouts/fragments :: delete('/brands', 'brand', ${brand.id})"></div>					
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Pagination  -->
+		<div th:replace="layouts/fragments :: pagination('/brands', 'Brand')"></div>
+		
+		<!-- Delete user confirmation modal -->
+		<div th:replace="layouts/modal :: delete_confirm"></div>
+
+		<!-- Footer -->
+		<div th:replace="layouts/fragments :: footer"></div>
+	</div>
+	
+	<!-- Script -->
+	<script th:src="@{/js/common_list.js}"></script>
+	<script type="text/javascript">
+		moduleURL = "[[@{/brands}]]";
+
+		$(document).ready(function(e){
+			$(".link-delete").on("click", function(e){
+				e.preventDefault();
+				showDeleteConfirmModal($(this), 'brand');
+			});
+		});
+	</script>
+</body>
+
+</html>

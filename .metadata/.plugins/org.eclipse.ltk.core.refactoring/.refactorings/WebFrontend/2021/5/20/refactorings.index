@@ -1,0 +1,12 @@
+1620757061018	Extract local variable 'product'
+1620757617495	Extract local variable 'product'
+1620758650839	Extract local variable 'category'
+1620759548293	Extract local variable 'product'
+1620759743482	Copy file
+1620759891791	Move files
+1620760022927	Rename resource 'products'
+1620760034836	Rename resource 'layouts'
+1621058925863	Extract local variable 'search'
+1621059009027	Extract local variable 'listProducts'
+1621059435636	Rename resource 'product_info.html'
+1621059647463	Rename resource 'product_fragment.html'

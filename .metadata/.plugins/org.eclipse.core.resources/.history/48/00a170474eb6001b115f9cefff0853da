@@ -1,0 +1,15 @@
+package com.evanshop.common.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="settings")
+public class Setting {
+	@Id
+	@Column(nullable = false, length = 128)
+	private String key;
+	
+}

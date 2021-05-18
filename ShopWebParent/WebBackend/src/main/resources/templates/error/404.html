@@ -1,0 +1,18 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+
+<!-- Page head -->
+<head th:replace="layouts/fragments :: page_head('Error - Shop evan', 'none')" />
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: menu"></div>
+
+		<div class="m-3">
+			<h2>Sorry, the requested page could not be found !!</h2>
+		</div>
+	
+		<div th:replace="layouts/fragments :: footer"></div>
+	</div>
+</body>
+</html>

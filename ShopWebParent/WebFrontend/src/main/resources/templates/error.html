@@ -1,0 +1,18 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Page head -->
+<head th:replace="layouts/fragments :: page_head('Error - Shop evan', 'none')" />
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: header_menu"></div>
+
+		<div class="m-3">
+			<h2>Sorry, you don't have permission to access this page !!</h2>
+		</div>
+	
+		<hr>
+
+		<div th:replace="layouts/navigation :: footer_menu"></div>
+	</div>
+</body>
+</html>

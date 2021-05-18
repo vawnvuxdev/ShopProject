@@ -1,0 +1,8 @@
+package com.evanshop.admin.setting;
+
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+@DataJpaTest
+public class SettingRepoTest {
+
+}
