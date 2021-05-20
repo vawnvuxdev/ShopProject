@@ -1,0 +1,5 @@
+package com.evanshop.admin.currency;
+
+public class CurrencyRepoTests {
+
+}

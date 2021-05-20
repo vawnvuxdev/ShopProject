@@ -1,0 +1,7 @@
+package com.evanshop.admin.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CurrencyRepository extends CrudRepository<T, ID> {
+
+}
