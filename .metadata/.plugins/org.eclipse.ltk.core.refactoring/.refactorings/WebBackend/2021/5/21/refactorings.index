@@ -1,2 +1,7 @@
 1621173534270	Delete element
 1621344985142	Extract local variable 'iterable'
+1621603248299	Copy file
+1621604597452	Move file
+1621605322542	Extract local variable 'listByNameAsc'
+1621605854547	Extract local variable 'listSettings'
+1621605895398	Extract local variable 'listCurrencies'

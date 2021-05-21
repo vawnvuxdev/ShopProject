@@ -1,0 +1,12 @@
+package com.evanshop.admin.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.evanshop.admin.repository.SettingRepository;
+
+@Service
+public class SettingService {
+
+	@Autowired private SettingRepository repository;	
+}

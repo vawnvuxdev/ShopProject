@@ -1,0 +1,5 @@
+package com.evanshop.admin.service;
+
+public class SettingService {
+
+}

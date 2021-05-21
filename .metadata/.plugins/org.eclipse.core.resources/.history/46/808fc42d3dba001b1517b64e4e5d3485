@@ -1,0 +1,19 @@
+package com.evanshop.admin.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.evanshop.admin.repository.SettingRepository;
+
+@Service
+public class SettingService {
+
+	@Autowired private SettingRepository repository;	
+	
+	public List<Setting> listAllSettings(){
+		return repository.findAll();
+	}
+	
+}
