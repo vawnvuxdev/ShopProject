@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CurrencyRepoTests.testListAll" project="WebBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.evanshop.admin.currency.CurrencyRepoTests" time="0.278" displayname="CurrencyRepoTests" uniqueid="[engine:junit-jupiter]/[class:com.evanshop.admin.currency.CurrencyRepoTests]">
-    <testcase name="testListAll" classname="com.evanshop.admin.currency.CurrencyRepoTests" time="0.278" displayname="testListAll()" uniqueid="[engine:junit-jupiter]/[class:com.evanshop.admin.currency.CurrencyRepoTests]/[method:testListAll()]"/>
-  </testsuite>
-</testrun>

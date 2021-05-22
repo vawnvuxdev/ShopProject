@@ -1,0 +1,12 @@
+package com.evanshop.common.entity;
+
+import java.util.List;
+
+public class SettingBag {
+
+	private List<Setting> listSettings;
+	
+	
+	
+	
+}

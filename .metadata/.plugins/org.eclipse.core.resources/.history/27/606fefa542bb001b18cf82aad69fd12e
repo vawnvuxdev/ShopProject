@@ -1,0 +1,5 @@
+package com.evanshop.common.entity;
+
+public class SettingBag {
+
+}
