@@ -1,7 +1,0 @@
-package com.evanshop.admin.controller;
-
-@Controller
-public class SetttingController {
-
-	
-}

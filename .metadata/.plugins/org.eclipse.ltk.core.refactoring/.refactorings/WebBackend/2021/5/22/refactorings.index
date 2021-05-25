@@ -1,0 +1,8 @@
+1621747561658	Extract local variable 'findByCategory'
+1621747748303	Extract local variable 'listSettings'
+1621748827932	Extract local variable 'settingBag'
+1621748900015	Extract method 'saveSiteLogo'
+1621749030543	Rename resource 'setting.html'
+1621749508997	Extract local variable 'findById'
+1621749650995	Extract method 'saveCurrencySymbol'
+1621749860074	Extract method 'updateSettingValue'

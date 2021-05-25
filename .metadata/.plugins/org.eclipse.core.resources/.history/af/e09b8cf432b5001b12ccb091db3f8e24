@@ -1,8 +1,0 @@
-<!DOCTYPE html>
-<html>
-<body>
-<div th:fragment="image_carousel">
-
-</div>
-</body>
-</html>
