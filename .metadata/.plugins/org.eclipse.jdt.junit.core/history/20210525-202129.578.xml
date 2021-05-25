@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="SettingRepoTest.testListSettingByCategory" project="WebBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.evanshop.admin.setting.SettingRepoTest" time="0.311" displayname="SettingRepoTest" uniqueid="[engine:junit-jupiter]/[class:com.evanshop.admin.setting.SettingRepoTest]">
+    <testcase name="testListSettingByCategory" classname="com.evanshop.admin.setting.SettingRepoTest" time="0.311" displayname="testListSettingByCategory()" uniqueid="[engine:junit-jupiter]/[class:com.evanshop.admin.setting.SettingRepoTest]/[method:testListSettingByCategory()]"/>
+  </testsuite>
+</testrun>

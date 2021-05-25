@@ -88,4 +88,6 @@ public class Setting {
 		return "Setting [key=" + key + ", value=" + value + "]";
 	}
 
+	
+
 }
