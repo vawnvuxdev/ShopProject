@@ -18,4 +18,7 @@
 		<item key="moveWizard.updateQualifiedNames" value="false"/>
 		<item key="patterns" value="*"/>
 	</section>
+	<section name="RefactoringPropertyPage">
+		<item key="org.eclipse.ltk.ui.refactoring.sortRefactorings" value="true"/>
+	</section>
 </section>
