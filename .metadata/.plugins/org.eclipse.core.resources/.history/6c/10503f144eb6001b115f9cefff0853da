@@ -1,7 +1,0 @@
-package com.evanshop.common.entity;
-
-@Entity
-@Table(name="settings")
-public class Setting {
-
-}

@@ -1,8 +1,0 @@
-package com.evanshop.common.entity;
-
-public class Currency {
-	private Integer id;
-	private String name;
-	private String symbol;
-	private String code;
-}

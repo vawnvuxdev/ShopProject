@@ -6,3 +6,5 @@
 1621749508997	Extract local variable 'findById'
 1621749650995	Extract method 'saveCurrencySymbol'
 1621749860074	Extract method 'updateSettingValue'
+1622149296123	Copy compilation unit
+1622149304820	Copy compilation unit

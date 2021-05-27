@@ -1,0 +1,25 @@
+package com.evanshop.admin.setting;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+
+import com.evanshop.admin.repository.SettingRepository;
+import com.evanshop.common.entity.Setting;
+import com.evanshop.common.entity.SettingCategory;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+public class SettingRepoTest {
+	
+	@Autowired SettingRepository repo;
+
+}
