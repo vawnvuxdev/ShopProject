@@ -1,10 +1,10 @@
 package com.evanshop.admin.service;
 
-import com.evanshop.admin.exception.UserNotFoundException;
-import com.evanshop.admin.repository.RoleRepository;
-import com.evanshop.admin.repository.UserRepository;
-import com.evanshop.common.entity.Role;
-import com.evanshop.common.entity.User;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,9 +13,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.NoSuchElementException;
+import com.evanshop.admin.repository.RoleRepository;
+import com.evanshop.admin.repository.UserRepository;
+import com.evanshop.common.entity.Role;
+import com.evanshop.common.entity.User;
+import com.evanshop.common.exception.UserNotFoundException;
 
 @Service
 @Transactional

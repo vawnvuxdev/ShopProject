@@ -18,11 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.evanshop.admin.config.FileUploadUtil;
-import com.evanshop.admin.exception.BrandNotFoundException;
 import com.evanshop.admin.service.BrandService;
 import com.evanshop.admin.service.CategoryService;
 import com.evanshop.common.entity.Brand;
 import com.evanshop.common.entity.Category;
+import com.evanshop.common.exception.BrandNotFoundException;
 
 @Controller
 @RequestMapping("/brands")

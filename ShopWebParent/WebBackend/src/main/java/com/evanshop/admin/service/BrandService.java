@@ -12,9 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.evanshop.admin.exception.BrandNotFoundException;
 import com.evanshop.admin.repository.BrandRepository;
 import com.evanshop.common.entity.Brand;
+import com.evanshop.common.exception.BrandNotFoundException;
 
 @Service
 @Transactional

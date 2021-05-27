@@ -19,12 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.evanshop.admin.config.FileUploadUtil;
 import com.evanshop.admin.config.sercurity.ShopUserDetails;
-import com.evanshop.admin.exception.ProductNotFoundException;
 import com.evanshop.admin.service.BrandService;
 import com.evanshop.admin.service.CategoryService;
 import com.evanshop.admin.service.ProductService;
 import com.evanshop.common.entity.Category;
 import com.evanshop.common.entity.Product;
+import com.evanshop.common.exception.ProductNotFoundException;
 
 @Controller
 @RequestMapping("/products")

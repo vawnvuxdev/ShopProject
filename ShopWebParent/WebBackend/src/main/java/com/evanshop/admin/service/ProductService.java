@@ -12,9 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.evanshop.admin.exception.ProductNotFoundException;
 import com.evanshop.admin.repository.ProductRepository;
 import com.evanshop.common.entity.Product;
+import com.evanshop.common.exception.ProductNotFoundException;
 
 @Service
 @Transactional

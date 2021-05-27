@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.evanshop.admin.dto.CategoryDTO;
-import com.evanshop.admin.exception.BrandNotFoundException;
 import com.evanshop.admin.exception.BrandNotFoundRestException;
 import com.evanshop.admin.service.BrandService;
 import com.evanshop.common.entity.Brand;
 import com.evanshop.common.entity.Category;
+import com.evanshop.common.exception.BrandNotFoundException;
 
 @RestController
 public class BrandRestController {

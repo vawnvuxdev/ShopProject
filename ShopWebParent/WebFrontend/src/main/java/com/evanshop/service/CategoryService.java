@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.evanshop.common.entity.Category;
+import com.evanshop.common.exception.CategoryNotFoundException;
 import com.evanshop.repository.CategoryRepository;
 
 @Service
@@ -29,8 +30,12 @@ public class CategoryService {
 		return listNoChildrenCateogries;
 	}
 	
-	public Category getCategoryByAlias(String alias) {
-		return repo.findByAliasEnabled(alias);
+	public Category getCategoryByAlias(String alias) throws CategoryNotFoundException {
+		Category category = repo.findByAliasEnabled(alias);
+		if(category == null) {
+			throw new CategoryNotFoundException("Could not found Category !");
+		}
+		return category;
 	}
 	
 	public List<Category> getCategoryParents(Category child){

@@ -17,9 +17,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.evanshop.admin.exception.CategoryNotFoundException;
 import com.evanshop.admin.repository.CategoryRepository;
 import com.evanshop.common.entity.Category;
+import com.evanshop.common.exception.CategoryNotFoundException;
 
 @Service
 @Transactional

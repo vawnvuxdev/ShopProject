@@ -18,10 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.evanshop.admin.config.FileUploadUtil;
-import com.evanshop.admin.exception.CategoryNotFoundException;
 import com.evanshop.admin.service.CategoryPageInfo;
 import com.evanshop.admin.service.CategoryService;
 import com.evanshop.common.entity.Category;
+import com.evanshop.common.exception.CategoryNotFoundException;
 
 @Controller
 @RequestMapping("/categories")

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Modal dialog -->
+	<div th:fragment="modal_dialog">
+		<div class="modal fade text-center" id="modalDialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-tittle" id="modalTitle">Warning</h3>
+					</div>
+
+					<div class="modal-body">
+						<span id="modalBody"></span>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete user confirmation modal -->
+	<div class="modal fade text-center" id="confirmModal" th:fragment="delete_confirm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-tittle">Delete Confirmation</h3>
+				</div>
+
+				<div class="modal-body">
+					<span id="confirmText"></span>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-success" id="yesButton">Yes</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
