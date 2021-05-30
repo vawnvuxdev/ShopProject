@@ -1,4 +1,4 @@
-package com.evanshop.admin.controller.rest;
+package com.evanshop.admin.restController;
 
 import java.util.ArrayList;
 import java.util.List;

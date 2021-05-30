@@ -16,21 +16,21 @@
 		<java.version>15</java.version>
 	</properties>
 	<dependencies>
-	
+
 		<!-- https://mvnrepository.com/artifact/net.sf.supercsv/super-csv -->
-		 <!-- Export to CSV file -->
+		<!-- Export to CSV file -->
 		<dependency>
-		    <groupId>net.sf.supercsv</groupId>
-		    <artifactId>super-csv</artifactId>
-		    <version>2.4.0</version>
+			<groupId>net.sf.supercsv</groupId>
+			<artifactId>super-csv</artifactId>
+			<version>2.4.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<!-- To export exel file, MS file -->
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi-ooxml</artifactId>
-		    <version>4.1.2</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.2</version>
 		</dependency>
 
 		<!-- To export pdf file -->
@@ -39,10 +39,14 @@
 			<artifactId>openpdf</artifactId>
 			<version>1.3.8</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
