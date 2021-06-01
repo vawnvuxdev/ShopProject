@@ -2,10 +2,13 @@ package com.evanshop.admin.country;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.evanshop.admin.repository.CountryRepository;
 import com.evanshop.common.entity.Country;
@@ -53,21 +58,53 @@ public class CountryRestControllerTest {
 	}
 
 	@Test
-	@WithMockUser(username = "adminuser@admin.net", password = "afdadfasdf", roles = "ADMIN")
+	@WithMockUser(username = "adminuser@admin.net", password = "adminadmin", roles = "ADMIN")
 	public void testCreateCountry() throws JsonProcessingException, Exception {
 		String url = "/countries/save";
-		String cName = "England";
-		String cCode = "EN";
+		String cName = "German";
+		String cCode = "DE";
 
-		Country eng = new Country(cName, cCode);
+		Country country = new Country(cName, cCode);
 
-		MvcResult result = mockMvc
-				.perform(post(url).contentType("application/json").content(mapper.writeValueAsString(eng)).with(csrf()))
+		MvcResult result = mockMvc.perform(
+				post(url).contentType("application/json").content(mapper.writeValueAsString(country)).with(csrf()))
 				.andDo(print()).andExpect(status().isOk()).andReturn();
+
 		String resposne = result.getResponse().getContentAsString();
 
-		System.out.println("Country ID:" + resposne);
+		Integer countryId = Integer.parseInt(resposne);
 
+		Optional<Country> findById = repository.findById(countryId);
+		assertThat(findById.isPresent());
+
+		Country savedCountry = findById.get();
+
+		assertThat(savedCountry.getName()).isEqualTo(cName);
+	}
+
+	@Test
+	@WithMockUser(username = "adminuser@admin.net", password = "adminadmin", roles = "ADMIN")
+	public void testUpdateCountry() throws JsonProcessingException, Exception {
+		String url = "/countries/save";
+		Integer cId = 6;
+		String cName = "China";
+		String cCode = "CN";
+
+		Country country = new Country(cId, cName, cCode);
+
+		mockMvc.perform(post(url).contentType("application/json")
+				.content(mapper.writeValueAsString(country))
+				.with(csrf()))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().string(String.valueOf(cId)));
+
+		Optional<Country> findById = repository.findById(cId);
+		assertThat(findById.isPresent());
+
+		Country savedCountry = findById.get();
+
+		assertThat(savedCountry.getName()).isEqualTo(cName);
 	}
 
 }
