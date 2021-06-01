@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" th:remove="tag">
+	<div>
+		<p>Country Manage</p>
+	</div>
+	<div>
+		<input type="button" value="Load Country List" class="btn btn-primary" id="loadCountriesBtn"/>
+	</div>
+	<div>
+		<select class="form-control m-2"  style="height: 300px" size="3" id="dropdownCountries"></select>
+	</div>
+	<div class="form-group row ml-2">
+		<label class="col-form-label mt-2">Country Name:</label>
+		<div class="col-md">
+			<input type="text" class="form-control mt-2" id="fieldCountryName" />
+		</div> 
+		<label class="col-form-label mt-2">Country Code:</label>
+		<div class="col-md">
+			<input type="text" class="form-control mt-2" id="fieldCountryCode" />
+		</div> 
+		<div class="col-lg-4 mt-2">  
+			<input type="button" value="Add" class="btn btn-primary mr-2" />
+			<input type="button" value="Update" class="btn btn-primary mr-2" />
+			<input type="button" value="Delete" class="btn btn-primary" />
+		</div>
+	</div>
+</div>
+</body>
+</html>
