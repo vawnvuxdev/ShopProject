@@ -97,7 +97,7 @@ public class CountryRestControllerTest {
 				.with(csrf()))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(content().string(String.valueOf(cId)));
+				.andExpect(MockMvcResultMatchers.content().string(String.valueOf(cId)));
 
 		Optional<Country> findById = repository.findById(cId);
 		assertThat(findById.isPresent());
@@ -105,6 +105,18 @@ public class CountryRestControllerTest {
 		Country savedCountry = findById.get();
 
 		assertThat(savedCountry.getName()).isEqualTo(cName);
+	}
+	
+	@Test
+	@WithMockUser(username = "adminuser@admin.net", password = "adminadmin", roles = "ADMIN")
+	public void testDelete() throws Exception {
+		Integer countryId = 6;
+		String url = "/countries/delete/" + countryId;
+		
+		mockMvc.perform(get(url)).andExpect(status().isOk());
+		
+		Optional<Country> findById = repository.findById(countryId);
+		assertThat(findById).isNotPresent();
 	}
 
 }
