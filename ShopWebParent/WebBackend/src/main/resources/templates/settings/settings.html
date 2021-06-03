@@ -77,8 +77,9 @@
 	var csrfHeaderName = "[[${_csrf.headerName}]]";
 	var csrfValue = "[[${_csrf.token}]]";
 </script>
-<script src="/ShopAdmin/js/common_form.js"></script>
-<script src="/ShopAdmin/js/country_setting.js"></script>
+<script th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/setting_country.js}"></script>
+<script th:src="@{/js/setting_state.js}"></script>
 </body>
 
 </html>

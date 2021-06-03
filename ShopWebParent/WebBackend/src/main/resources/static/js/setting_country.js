@@ -53,7 +53,7 @@ function deleteCountry() {
 	}).done(() => {
 		showToastMessage("Selected country has been deleted!!");
 	}).fail(() => {
-		showToastMessage("ERROR: Can not connect to server!!");
+		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
 
@@ -81,7 +81,7 @@ function updateCountry() {
 		showToastMessage("Selected country has updated sucessfully!");
 		changeFormStateToNew();
 	}).fail(() => {
-		showToastMessage("ERROR: Can not connect to server!!");
+		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
 
@@ -115,7 +115,7 @@ function addCountry() {
 		selectNewCountry(countryId, countryName, countryCode);
 		showToastMessage("New country has added sucessfully!");
 	}).fail(() => {
-		showToastMessage("ERROR: Can not connect to server!!");
+		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
 
@@ -157,7 +157,7 @@ function loadCountries() {
 		loadButton.val("Refresh Country List");
 		showToastMessage("All countries have loaded!!");
 	}).fail(() => {
-		showToastMessage("ERROR: Can not connect to server!!");
+		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
 

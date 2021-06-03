@@ -6,24 +6,29 @@
 		<p>State Manage</p>
 	</div>
 	<div>
-		<input type="button" value="Load Country List" class="btn btn-primary" id="loadCountriesBtn"/>
+		<input type="button" value="Load Countries" class="btn btn-primary" id="loadCountriesForStatesBtn"/>
 	</div>
-	<div>
-		<select class="form-control m-2"  style="height: 300px" size="3" id="dropdownCountries"></select>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label">Selected Country:</label>
+		<div class="col-sm-10">
+			<select class="form-control m-2" id="dropdownCountriesForStates"></select>
+		</div>
 	</div>
-	<div class="form-group row ml-2">
-		<label class="col-form-label mt-2" id="countryNameLabel">State Country:</label>
-		<div class="col-md">
-			<input type="text" class="form-control mt-2" id="fieldCountryName" />
-		</div> 
-		<label class="col-form-label mt-2">Country Code:</label>
-		<div class="col-md">
-			<input type="text" class="form-control mt-2" id="fieldCountryCode" />
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label">All States/Provinces:</label>
+		<div class="col-sm-10">
+			<select class="form-control m-2"  style="height: 300px" size="3" id="dropdownStates"></select>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-2 col-form-label" id="stateNameLabel">State/Province Name:</label>
+		<div class="col-sm-6 mt-2">
+			<input type="text" class="form-control mt-2" id="stateNameField" />
 		</div> 
 		<div class="col-lg-4 mt-2">  
-			<input type="button" id="addCountryBtn" value="Add" class="btn btn-primary mr-2" />
-			<input type="button" id="updateCountryBtn" value="Update" class="btn btn-primary mr-2" disabled="disabled"/>
-			<input type="button" id="deleteCountryBtn" value="Delete" class="btn btn-primary" disabled="disabled"/>
+			<input type="button" id="addStateBtn" value="Add" class="btn btn-primary mr-2" />
+			<input type="button" id="updateStateBtn" value="Update" class="btn btn-secondary mr-2" disabled="disabled"/>
+			<input type="button" id="deleteStateBtn" value="Delete" class="btn btn-secondary" disabled="disabled"/>
 		</div>
 	</div>
 </div>
