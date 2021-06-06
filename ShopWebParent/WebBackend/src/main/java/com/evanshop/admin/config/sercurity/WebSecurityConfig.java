@@ -44,34 +44,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				//User
-				.antMatchers("/users/**").hasAuthority("Admin")
-				//Category
+				// User
+				.antMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
+				// Category
 				.antMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
-				//Brand
+				// Brand
 				.antMatchers("/brands/**").hasAnyAuthority("Admin", "Editor")
-				//Product
+				// Product
 				.antMatchers("/products", "/products/", "/products/detail/**", "/products/page/**")
-					.hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
-					
-				.antMatchers("/products/new", "/products/delete/**")
-					.hasAnyAuthority("Admin", "Editor")
-					
+				.hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+
+				.antMatchers("/products/new", "/products/delete/**").hasAnyAuthority("Admin", "Editor")
+
 				.antMatchers("/products/edit/**", "/products/save", "/products/check_unique")
-					.hasAnyAuthority("Admin", "Editor", "Salesperson")
-					
-				.antMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
-				.anyRequest().authenticated()
-				.and()
-				.formLogin()
-					.loginPage("/login")
-					.usernameParameter("email")
-					.permitAll()
-				.and().logout().permitAll()
-				.and()
-					.rememberMe()
-						.key("olaolasdajsdufizxcvokzxfd_asdjklaj21314")
-						.tokenValiditySeconds(7*24*60*60);
+				.hasAnyAuthority("Admin", "Editor", "Salesperson")
+
+				.antMatchers("/products/**").hasAnyAuthority("Admin", "Editor").anyRequest().authenticated().and()
+				.formLogin().loginPage("/login").usernameParameter("email").permitAll().and().logout().permitAll().and()
+				.rememberMe().key("olaolasdajsdufizxcvokzxfd_asdjklaj21314").tokenValiditySeconds(7 * 24 * 60 * 60);
 	}
 
 	@Override

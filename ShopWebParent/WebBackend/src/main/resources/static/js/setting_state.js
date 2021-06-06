@@ -30,7 +30,7 @@ $(document).ready(() => {
 		if (addStateBtn.val() == "Add") {
 			addState();
 		} else {
-			changeFormStateToNew();
+			changeFormStateToNewState();
 		}
 	});
 
@@ -70,7 +70,7 @@ function loadStatesByCountry() {
 			$("<option>").val(state.id).text(state.name).appendTo(dropdownStates);
 		})
 	}).done(() => {
-		changeFormStateToNew();
+		changeFormStateToNewState();
 		showToastMessage("All states of selected country have loaded!!");
 	}).fail(() => {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
@@ -90,7 +90,7 @@ function changeFormStateToSelectedState() {
 }
 
 /*4*/
-function changeFormStateToNew() {
+function changeFormStateToNewState() {
 	addStateBtn.val("Add");
 	stateNameLabel.text("Country Name:");
 
@@ -151,6 +151,7 @@ function updateState() {
 	}).done((stateId) => {
 		$("#dropdownStates option:selected").text(stateName);
 		showToastMessage("Selected state has updated sucessfully!");
+		
 	}).fail(() => {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
@@ -163,10 +164,16 @@ function deleteState() {
 	stateId = dropdownStates.val();
 	url = contextPath + "states/delete/" + stateId;
 	
-	$.get(url, () => {
-		$("#dropdownStates option[value = '" + optionValue + "']").remove();
+	$.ajax({
+		type: 'DELETE',
+		url: url,
+		beforeSend: (xhr) => {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue)
+		}
 	}).done(() => {
+		$("#dropdownStates option[value = '" + optionValue + "']").remove();
 		showToastMessage("Selected state has been deleted!!");
+		changeFormStateToNewState();
 	}).fail(() => {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});

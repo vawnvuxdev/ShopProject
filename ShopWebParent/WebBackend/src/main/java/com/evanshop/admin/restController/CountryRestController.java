@@ -3,6 +3,7 @@ package com.evanshop.admin.restController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ public class CountryRestController {
 		return String.valueOf(savedCountry.getId());
 	}
 	
-	@GetMapping("/countries/delete/{id}")
+	@DeleteMapping("/countries/delete/{id}")
 	public void deleteCountry(@PathVariable("id") Integer id){
 		repository.deleteById(id);
 	}

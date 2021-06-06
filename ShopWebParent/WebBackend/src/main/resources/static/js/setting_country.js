@@ -20,25 +20,25 @@ $(document).ready(() => {
 	fieldCountryName = $("#fieldCountryName");
 	fieldCountryCode = $("#fieldCountryCode");
 
-	loadButton.click(() => {
+	loadButton.click(function() {
 		loadCountries();
 	});
 
-	dropdownCountries.on("change", () => {
+	dropdownCountries.on("change", function() {
 		changeFormStateToSelectedCountry();
 	});
 
-	addCountryBtn.on("click", () => {
+	addCountryBtn.on("click", function() {
 		if (addCountryBtn.val() == "Add") {
 			addCountry();
 		} else {
-			changeFormStateToNew();
+			changeFormStateToNewCountry();
 		}
 	});
 
-	updateCountryBtn.on("click", () => { updateCountry(); });
+	updateCountryBtn.on("click", function() { updateCountry(); });
 
-	deleteCountryBtn.on("click", () => { deleteCountry(); });
+	deleteCountryBtn.on("click", function() { deleteCountry(); });
 
 });
 
@@ -48,10 +48,16 @@ function deleteCountry() {
 
 	url = contextPath + "countries/delete/" + countryId;
 
-	$.get(url, () => {
-		$("#dropdownCountries option[value = '" + optionValue + "']").remove();
+	$.ajax({
+		type: 'DELETE',
+		url: url,
+		beforeSend: (xhr) => {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue)
+		}
 	}).done(() => {
+		$("#dropdownCountries option[value = '" + optionValue + "']").remove();
 		showToastMessage("Selected country has been deleted!!");
+		changeFormStateToNewCountry();
 	}).fail(() => {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
@@ -75,11 +81,11 @@ function updateCountry() {
 		},
 		data: JSON.stringify(jsonData),
 		contentType: 'application/json'
-	}).done((countryId) => {
+	}).done(function(countryId) {
 		$("#dropdownCountries option:selected").val(countryId + "-" + countryCode);
 		$("#dropdownCountries option:selected").text(countryName);
 		showToastMessage("Selected country has updated sucessfully!");
-		changeFormStateToNew();
+		changeFormStateToNewCountry();
 	}).fail(() => {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
@@ -106,20 +112,20 @@ function addCountry() {
 	$.ajax({
 		type: 'POST',
 		url: url,
-		beforeSend: (xhr) => {
+		beforeSend: function(xhr) {
 			xhr.setRequestHeader(csrfHeaderName, csrfValue)
 		},
 		data: JSON.stringify(jsonData),
 		contentType: 'application/json'
-	}).done((countryId) => {
+	}).done(function(countryId) {
 		selectNewCountry(countryId, countryName, countryCode);
 		showToastMessage("New country has added sucessfully!");
-	}).fail(() => {
+	}).fail(function() {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
 
-function changeFormStateToNew() {
+function changeFormStateToNewCountry() {
 	addCountryBtn.val("Add");
 	countryNameLabel.text("Country Name:");
 
@@ -146,17 +152,17 @@ function changeFormStateToSelectedCountry() {
 
 function loadCountries() {
 	url = contextPath + "countries/list";
-	$.get(url, (responseJSON) => {
+	$.get(url, function(responseJSON) {
 		dropdownCountries.empty();
 
-		$.each(responseJSON, (index, country) => {
+		$.each(responseJSON, function(index, country) {
 			optionValue = country.id + "-" + country.code;
 			$("<option>").val(optionValue).text(country.name).appendTo(dropdownCountries);
 		})
-	}).done(() => {
+	}).done(function() {
 		loadButton.val("Refresh Country List");
 		showToastMessage("All countries have loaded!!");
-	}).fail(() => {
+	}).fail(function() {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
