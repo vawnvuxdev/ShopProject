@@ -189,4 +189,8 @@ public class Customer {
 		return "Customer [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
+	public String getFullName() {
+		return this.firstName + this.lastName;
+	}
+
 }

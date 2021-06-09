@@ -1,18 +1,16 @@
-$(document).ready(function() {
-	$("a[name='linkRemoveDetail']").each(function(index) {
-		$(this).click(function() {
-			removeDetailByIndex(index);
-		});
-	});
-
+$(document).ready(function () {
+  $("a[name='linkRemoveDetail']").each(function (index) {
+    $(this).click(function () {
+      removeDetailByIndex(index);
+    });
+  });
 });
 
 function addNextDetailSection() {
+  allDivDetails = $("[id^='divDetail']");
+  divDetailsCount = allDivDetails.length;
 
-	allDivDetails = $("[id^='divDetail']")
-	divDetailsCount = allDivDetails.length;
-
-	htmlDetailSection = `
+  htmlDetailSection = `
 		<div class="form-inline" id="divDetail${divDetailsCount}">
 			<label class="m-3">Name: </label>
 			<input type="text" class="form-control w-25" name="detailNames" maxlength="255" />
@@ -21,25 +19,25 @@ function addNextDetailSection() {
 		</div>
 	`;
 
-	$("#divProductDetails").append(htmlDetailSection);
+  $("#divProductDetails").append(htmlDetailSection);
 
-	previousDivDetailSection = allDivDetails.last();
-	previousDivDetailId = previousDivDetailSection.attr("id");
+  previousDivDetailSection = allDivDetails.last();
+  previousDivDetailId = previousDivDetailSection.attr("id");
 
-	htmlRemove = `
+  htmlRemove = `
 		<a class="btn fas fa-times-circle" title="Remove this detail"
 		href="javascript:removeDetailSectionById('${previousDivDetailId}')" ></a>
 	`;
 
-	previousDivDetailSection.append(htmlRemove);
+  previousDivDetailSection.append(htmlRemove);
 
-	$("input[name='detailNames']").last().focus();
+  $("input[name='detailNames']").last().focus();
 }
 
 function removeDetailSectionById(id) {
-	$("#" + id).remove();
+  $("#" + id).remove();
 }
 
 function removeDetailByIndex(index) {
-	$("#divDetail" + index).remove();
+  $("#divDetail" + index).remove();
 }

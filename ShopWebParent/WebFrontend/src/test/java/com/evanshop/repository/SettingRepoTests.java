@@ -11,6 +11,8 @@ import org.springframework.test.annotation.Rollback;
 
 import com.evanshop.common.entity.Setting;
 import com.evanshop.common.entity.SettingCategory;
+import com.evanshop.service.SettingService;
+import com.evanshop.setting.EmailSettingBag;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -18,6 +20,8 @@ import com.evanshop.common.entity.SettingCategory;
 public class SettingRepoTests {
 	
 	@Autowired SettingRepository repo;
+	@Autowired private SettingService  settingService;
+
 	
 	@Test
 	public void findByTwoCatgTest() {

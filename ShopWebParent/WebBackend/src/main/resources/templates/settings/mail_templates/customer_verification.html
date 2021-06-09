@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" th:remove="tag">
+	<form th:action="@{/settings/save_mail_templates}" method="post">	
+		<div class="form-group row">
+			<label for="" class="col-sm-2 col-form-label">E-mail Subject: </label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="CUSTOMER_VERIFY_SUBJECT" th:value="${CUSTOMER_VERIFY_SUBJECT}" required />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label for="" class="col-sm-2 col-form-label">E-mail Content: </label>
+			<div class="col-sm-10">
+				<textarea class="form-control" rows="5" name="CUSTOMER_VERIFY_CONTENT" id="customerVerificationContent" required>[[${CUSTOMER_VERIFY_CONTENT}]]</textarea>
+			</div>				
+		</div>
+		<div class="text-center">
+			<input type="submit" value="Save" class="btn btn-primary m-3" /> 
+		</div>		
+	</form>
+</div>
+</body>
+</html>

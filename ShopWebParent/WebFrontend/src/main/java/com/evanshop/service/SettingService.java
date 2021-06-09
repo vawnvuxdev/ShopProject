@@ -1,6 +1,5 @@
 package com.evanshop.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.evanshop.common.entity.Setting;
 import com.evanshop.common.entity.SettingCategory;
 import com.evanshop.repository.SettingRepository;
+import com.evanshop.setting.EmailSettingBag;
 
 @Service
 public class SettingService {
@@ -17,15 +17,14 @@ public class SettingService {
 	private SettingRepository repository;
  
 	public List<Setting> getGeneralSettings() {
-		List<Setting> settings = new ArrayList<>();
-
-		List<Setting> generalSettings = repository.findByCategory(SettingCategory.GENERAL);
-		List<Setting> currencySettings = repository.findByCategory(SettingCategory.CURRENCY);
-		
-		settings.addAll(generalSettings);
-		settings.addAll(currencySettings);
-		return settings;
+		return repository.findByTwoCategory(SettingCategory.GENERAL, SettingCategory.CURRENCY);
 	}
 	
-
+	public EmailSettingBag getEmailSettings() {
+		List<Setting> settings = repository.findByCategory(SettingCategory.MAIL_SERVER);
+		settings.addAll(repository.findByCategory(SettingCategory.MAIL_TEMPLATE));
+		
+		return new EmailSettingBag(settings);
+	}
+	
 }
