@@ -37,8 +37,8 @@ public class CustomerService {
 		
 		String randomCode = RandomString.make(64);
 		customer.setVerificationCode(randomCode);
-
-		System.out.println(randomCode);
+		
+		customerRepo.save(customer);
 	}
 	
 	public void encodePassword(Customer customer) {

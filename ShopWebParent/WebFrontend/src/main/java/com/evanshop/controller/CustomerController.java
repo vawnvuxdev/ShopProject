@@ -54,8 +54,6 @@ public class CustomerController {
 	private void sendVerificationMail(HttpServletRequest request, Customer customer) throws UnsupportedEncodingException, MessagingException {
 		EmailSettingBag emailSettings = settingService.getEmailSettings();
 		
-		System.out.println(emailSettings.getValue("MAIL_FROM"));
-		
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
 		
 		String toAddress = customer.getEmail();
@@ -71,7 +69,7 @@ public class CustomerController {
 
 		content = content.replace("[[URL]]", verifyURL);
 		
-		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getMailSenderName());
+		helper.setFrom(emailSettings.getUsername(), emailSettings.getMailSenderName());
 		helper.setTo(toAddress);
 		helper.setSubject(subject);
 		helper.setText(content, true);
@@ -82,7 +80,4 @@ public class CustomerController {
 		System.out.println(verifyURL);
 		
 	}
-	
-	 
-	// MAIL_FROM vi1thegioitotdep@gmail.com MAIL_SERVER
 }

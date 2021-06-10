@@ -27,7 +27,7 @@ public class EmailSettingBag extends SettingBag {
 		return super.getValue("MAIL_PASSWORD");
 	}
 
-	public String getFromAddress() {
+	public String getSenderEmailAddress() {
 		return super.getValue("MAIL_FROM");
 	}
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.evanshop.repository.SettingRepository"/>
     <fullyQualifiedTypeName name="com.evanshop.service.SettingService"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="org.hibernate.annotations.Parameter"/>
     <fullyQualifiedTypeName name="com.evanshop.common.entity.Setting"/>
     <fullyQualifiedTypeName name="com.evanshop.common.entity.SettingCategory"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Modifying"/>
 </qualifiedTypeNameHistroy>

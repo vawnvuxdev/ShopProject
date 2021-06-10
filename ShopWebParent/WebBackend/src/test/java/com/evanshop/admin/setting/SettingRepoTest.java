@@ -49,7 +49,7 @@ public class SettingRepoTest {
 	
 	@Test
 	public void testListSettingByCategory() {
-		List<Setting> settings = repo.findByCategory(SettingCategory.GENERAL);
+		List<Setting> settings = repo.findByCategory(SettingCategory.MAIL_SERVER);
 		
 		settings.forEach(System.out::println);
 		
