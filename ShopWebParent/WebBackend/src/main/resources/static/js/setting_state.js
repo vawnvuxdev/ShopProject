@@ -39,7 +39,6 @@ $(document).ready(() => {
 	deleteStateBtn.on("click", function() { deleteState(); });
 });
 
-/*1*/
 function loadCountriesForStates() {
 	url = contextPath + "countries/list";
 
@@ -57,7 +56,16 @@ function loadCountriesForStates() {
 	});
 }
 
-/*2*/
+function validateFormState() {
+	formState = document.getElementById("formState");
+	if (!formState.checkValidity()) {
+		formState.reportValidity();
+		return false;
+	}
+
+	return true;
+}
+
 function loadStatesByCountry() {
 	selectedCountry = $("#dropdownCountriesForStates option:selected");
 	countryId = selectedCountry.val();
@@ -78,7 +86,6 @@ function loadStatesByCountry() {
 
 }
 
-/*3*/
 function changeFormStateToSelectedState() {
 	addStateBtn.prop("value", "New");
 	updateStateBtn.prop("disabled", false);
@@ -89,7 +96,6 @@ function changeFormStateToSelectedState() {
 	stateNameField.val(selectedStateName);
 }
 
-/*4*/
 function changeFormStateToNewState() {
 	addStateBtn.val("Add");
 	stateNameLabel.text("Country Name:");
@@ -100,8 +106,8 @@ function changeFormStateToNewState() {
 	stateNameField.val("").focus();
 }
 
-/*5*/
 function addState() {
+	if (!validateFormState()) return;
 	url = contextPath + "states/save";
 	stateName = stateNameField.val();
 
@@ -128,8 +134,9 @@ function addState() {
 }
 
 
-/*6*/
 function updateState() {
+	if (!validateFormState()) return;
+
 	url = contextPath + "states/save";
 	stateId = dropdownStates.val();
 	stateName = stateNameField.val();
@@ -151,19 +158,18 @@ function updateState() {
 	}).done((stateId) => {
 		$("#dropdownStates option:selected").text(stateName);
 		showToastMessage("Selected state has updated sucessfully!");
-		
+
 	}).fail(() => {
 		showToastMessage("ERROR: Could not connect to server or have some ERROR !!!");
 	});
 }
 
 
-/*7*/
 function deleteState() {
 	optionValue = dropdownStates.val();
 	stateId = dropdownStates.val();
 	url = contextPath + "states/delete/" + stateId;
-	
+
 	$.ajax({
 		type: 'DELETE',
 		url: url,
@@ -179,7 +185,6 @@ function deleteState() {
 	});
 }
 
-/*7*/
 function selectNewlyAddedState(stateId, stateName) {
 	optionValue = stateName;
 	$("<option>").val(optionValue).text(stateName).appendTo(dropdownStates);

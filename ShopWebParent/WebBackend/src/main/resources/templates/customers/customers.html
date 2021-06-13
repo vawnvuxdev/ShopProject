@@ -1,0 +1,149 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="layouts/fragments :: page_head('Customers - Shopevan', 'none')"></head>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="layouts/navigation :: menu"></div>
+
+		<div class="m-3">
+			<h3>Manage Customers</h3>
+			<th:block sec:authorize="hasAuthority('Admin')">
+				<a th:href="@{/products/new}" class="fas fa-plus-square icon-dark mr-3" title="Create new Customer"></a>
+				<a th:href="@{/products/export/csv}" class="fas fa-file-csv icon-dark mr-3" title="Export to CSV"></a>
+			</th:block>
+			
+		</div>
+		<hr>
+
+		<!-- Form search -->
+		<div>
+			<form th:action="@{/products/page/1}" class="form-inline m-3" id="searchForm">
+				<input type="hidden" name="sortField" th:value="${sortField}" />
+				<input type="hidden" name="sortDir" th:value="${sortDir}" />
+				
+				&nbsp;&nbsp;Filter:&nbsp;
+				<input type="search" th:value="${keyword}" name="keyword" class="form-control" required />
+				&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+				&nbsp;&nbsp;
+				<button type="button" class="btn btn-secondary" onclick="clearFilter()"><i
+						class="fas fa-eraser"></i></button>
+			</form>
+			
+			<!-- Show message -->
+			<div class="alert alert-success text-center" th:if="${message}">[[${message}]]</div>		
+		</div>
+
+		<!-- Show brands  -->
+		<div class="full-details">
+			<table class="table table-striped table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th class="hideable-column">
+							<th th:replace="layouts/fragments :: column_link('/customers', 'id', 'ID', 'tag')" />
+						</th>
+						<th th:replace="layouts/fragments :: column_link('/customers', 'firstName', 'First Name', 'none')" />
+						<th th:replace="layouts/fragments :: column_link('/customers', 'lastName', 'Last Name', 'none')" />
+						<th class="hideable-column">
+							<th th:replace="layouts/fragments :: column_link('/customers', 'email', 'Email', 'tag')" />
+						</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Country</th>
+						<th th:replace="layouts/fragments :: column_link('/customers', 'enabled', 'Enabled', 'none')" />
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="customer : ${listCustomers}" style="height: 100px">
+						<td>
+							[[${customer.id}]]
+						</td>
+						<td>
+							[[${customer.firstName}]]
+						</td>
+						<td>
+							[[${customer.lastName}]]
+
+						</td>
+						<td>
+							[[${customer.email}]]
+						</td>
+						<td>
+							[[${customer.city}]]
+						</td>
+						<td>
+							[[${customer.state}]]
+						</td>
+						<td>
+							[[${customer.country.name}]]
+						</td>
+						<th:block sec:authorize="hasAuthority('Admin')">
+						<td>
+							<div th:replace="layouts/fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.id})"></div>
+						</td>
+						</th:block>
+						<td>
+					<td>
+							<a th:href="@{'/customers/' + ${customer.id}}"
+								class="fas fa-file-alt icon-green mr-2 link-detail" 
+								title="View customer detail !"></a>
+							<th:block sec:authorize="hasAuthority('Admin')">						
+							<div th:replace="layouts/fragments :: edit('/customers, 'customer', ${customer.id})"></div>
+							</th:block>
+							<th:block sec:authorize="hasAuthority('Admin')">					
+							<div th:replace="layouts/fragments :: delete('/customers,', 'customer', ${customer.id})"></div>
+							</th:block>
+						</td>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Pagination  -->
+		<div th:replace="layouts/fragments :: pagination('/customers', 'Customer')"></div>
+		
+		<!-- Delete confirmation modal -->
+		<div th:replace="layouts/modal :: delete_confirm"></div>
+
+		<!-- Detail modal -->
+		<div class="modal fade" id="detailModal">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content"></div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<div th:replace="layouts/fragments :: footer"></div>
+	</div>
+	
+	<!-- Script -->
+	<script th:src="@{/js/common_list.js}"></script>
+	<script type="text/javascript">
+		moduleURL = "[[@{/customers}]]";
+
+		$(document).ready(function(e){
+			$(".link-delete").on("click", function(e){
+				e.preventDefault();
+				showDeleteConfirmModal($(this), 'product');
+			});
+			
+			$(".link-detail").on("click", function(e){
+				e.preventDefault();
+				linkDetailURL = $(this).attr("href");
+				$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+			});
+			
+			$("#dropdownCategory").on("change", function(){
+				$("#searchForm").submit();
+			});
+			
+		});
+	</script>
+</body>
+
+</html>

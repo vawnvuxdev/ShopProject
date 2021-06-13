@@ -3,6 +3,8 @@ package com.evanshop.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import com.evanshop.repository.CustomerRepository;
 import net.bytebuddy.utility.RandomString;
 
 @Service 
+@Transactional
 public class CustomerService {
 	
 	@Autowired private CustomerRepository customerRepo;
@@ -44,5 +47,17 @@ public class CustomerService {
 	public void encodePassword(Customer customer) {
 		String encodedPassword = passwordEncoder.encode(customer.getPassword());
 		customer.setPassword(encodedPassword);
+	}
+	
+	public boolean verify(String verificationCode) {
+		Customer customer = customerRepo.findByVerificationCode(verificationCode);
+		
+		if (customer == null || customer.isEnabled()) {
+			return false;
+		} else {
+			customerRepo.enable(customer.getId());
+			return true;
+		}
+		
 	}
 }

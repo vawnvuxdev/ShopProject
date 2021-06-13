@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.evanshop.service.SettingService"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
-    <fullyQualifiedTypeName name="javax.persistence.Id"/>
-    <fullyQualifiedTypeName name="org.hibernate.annotations.GeneratorType"/>
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
@@ -44,12 +39,7 @@
     <fullyQualifiedTypeName name="org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase"/>
     <fullyQualifiedTypeName name="org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="com.evanshop.admin.repository.CustomerRepository"/>
     <fullyQualifiedTypeName name="com.evanshop.admin.repository.CountryRepository"/>
-    <fullyQualifiedTypeName name="com.evanshop.admin.service.CustomerService"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.evanshop.common.entity.Customer"/>
     <fullyQualifiedTypeName name="com.evanshop.repository.CountryRepository"/>
     <fullyQualifiedTypeName name="com.evanshop.service.CustomerService"/>
@@ -59,5 +49,15 @@
     <fullyQualifiedTypeName name="org.hibernate.annotations.Parameter"/>
     <fullyQualifiedTypeName name="com.evanshop.common.entity.Setting"/>
     <fullyQualifiedTypeName name="com.evanshop.common.entity.SettingCategory"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.PagingAndSortingRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Modifying"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
+    <fullyQualifiedTypeName name="com.evanshop.admin.repository.CustomerRepository"/>
+    <fullyQualifiedTypeName name="com.evanshop.admin.service.CustomerService"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
