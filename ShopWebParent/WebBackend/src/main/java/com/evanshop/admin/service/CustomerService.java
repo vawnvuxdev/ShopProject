@@ -1,6 +1,7 @@
 package com.evanshop.admin.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,15 @@ public class CustomerService {
 		
 		return customerRepo.findAll(pageable);
 	}
+	
+	public Customer getById(Integer id) throws CustomerNotFoundException {
+		try {
+			return customerRepo.findById(id).get();
+		} catch (NoSuchElementException e) {
+			throw new CustomerNotFoundException("Could not find any customer with ID: " + id);
+		}
+	}
+	
 	
 	public void save(Customer customerInForm) {
 		if (!customerInForm.getPassword().isEmpty()) {

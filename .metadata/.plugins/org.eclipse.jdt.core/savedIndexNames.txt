@@ -50,7 +50,6 @@ INDEX VERSION 1.131+C:\Projects\EvanShopProject\ShopProject\.metadata\.plugins\o
 2375063274.index
 456913895.index
 1069975791.index
-468004736.index
 2002576440.index
 1336287639.index
 808145206.index
